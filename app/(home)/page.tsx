@@ -2,31 +2,64 @@ import { db } from "@/lib/db";
 import getCoursesByCategory from "../actions/getCourses";
 import Categories from "@/components/custom/Categories";
 import CourseCard from "@/components/courses/CourseCard";
+import HeroSection from "@/components/hero/HeroSection";
+import ElectricBackground from "@/components/custom/ElectricBackground";
+import Footer from "@/components/layout/Footer";
 
 export default async function Home() {
-  const categories = await db.category.findMany({
-    orderBy: {
-      name: "asc",
-    },
-    include: {
-      subCategories: {
+    // Truy vấn danh mục từ cơ sở dữ liệu
+    const categories = await db.category.findMany({
         orderBy: {
-          name: "asc",
+            name: "asc",
         },
-      },
-    },
-  });
+        include: {
+            subCategories: {
+                orderBy: {
+                    name: "asc",
+                },
+            },
+        },
+    });
 
-  const courses = await getCoursesByCategory(null);
-  return (
-    <div className="md:mt-5 md:px-10 xl:px-16 pb-16">
-      <Categories categories={categories} selectedCategory={null} />
-      <div className="flex flex-wrap gap-7 justify-center">
-        {courses.map((course) => (
-          <CourseCard key={course.id} course={course} />
-        ))}
-      </div>
-      
-    </div>
-  );
+    // Lấy danh sách khóa học
+    const courses = await getCoursesByCategory(null);
+
+    return (
+        <div className="flex flex-col min-h-screen">
+            {/* Nội dung chính */}
+            <main className="md:mt-5 md:px-10 xl:px-16 pb-16 space-y-10 flex-1">
+                {/* Hero Section */}
+                <HeroSection />
+
+                {/* Danh sách khóa học */}
+                <section>
+                    <h2 className="text-2xl font-bold text-gray-800 mb-6">
+                        Khóa học nổi bật
+                    </h2>
+                    <div className="flex flex-wrap gap-7 justify-center">
+                        {courses.length > 0 ? (
+                            courses.map((course) => (
+                                <CourseCard key={course.id} course={course} />
+                            ))
+                        ) : (
+                            <p className="text-gray-500">
+                                Hiện tại không có khóa học nào.
+                            </p>
+                        )}
+                    </div>
+                </section>
+
+                {/* Danh mục khóa học */}
+                <section>
+                    <h2 className="text-2xl font-bold text-gray-800 mb-6">
+                        Danh mục khóa học
+                    </h2>
+                    <Categories categories={categories} selectedCategory={null} />
+                    <ElectricBackground />
+                </section>
+            </main>
+
+
+        </div>
+    );
 }

@@ -1,0 +1,30 @@
+/* Container dot căn bên trái */
+.custom-dots {
+    margin-top: 20px;
+    margin-left: 10px; /* Căn sang bên trái */
+    display: flex !important;
+    justify-content: flex-start; /* Đẩy dot sang bên trái */
+    align-items: center;
+    gap: 12px; /* Khoảng cách giữa các dot */
+}
+
+/* Dot cơ bản */
+.custom-dots li button {
+    width: 24px;
+    height: 8px;
+    background-color: #e5e7eb; /* Màu xám nhạt */
+    border: none;
+    border-radius: 4px;
+    transition: all 0.3s ease-in-out; /* Hiệu ứng mượt mà */
+}
+
+/* Dot khi active */
+.custom-dots li.slick-active button {
+    background-color: #374151; /* Màu xám đậm */
+    transform: scale(1.2); /* Tăng kích thước dot khi active */
+}
+
+/* Thu nhỏ chiều cao slide */
+.slick-slider .slick-list {
+    padding: 0 20px; /* Khoảng cách nội bộ để không che mũi tên */
+}

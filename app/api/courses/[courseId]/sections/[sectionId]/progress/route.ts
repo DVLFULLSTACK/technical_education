@@ -23,7 +23,7 @@ export const POST = async (
     });
 
     if (!course) {
-      return new NextResponse("Course Not Found", { status: 404 });
+      return new NextResponse("Course Not Found", { status: 404 });1
     }
 
     const section = await db.section.findUnique({

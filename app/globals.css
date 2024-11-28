@@ -91,3 +91,30 @@ body,
 }
 
 @import "@uploadthing/react/styles.css";
+
+/* Gradient Background Effect */
+.bg-gradient {
+  background: linear-gradient(
+          120deg,
+          rgba(255, 255, 255, 0.1) 25%,
+          rgba(0, 0, 0, 0.1) 50%,
+          rgba(255, 255, 255, 0.1) 75%
+  );
+  background-size: 200% 100%;
+  opacity: 0.1; /* Độ mờ để tạo ánh sáng dịu */
+}
+
+/* Animation Keyframes */
+@keyframes electric {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Animation Class */
+.animate-electric {
+  animation: electric 6s linear infinite; /* Chạy mượt */
+}

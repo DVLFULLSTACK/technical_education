@@ -121,7 +121,7 @@ model Resource {
 
 model Progress {
   id        String @id @default(uuid())
-  studentId String 
+  studentId String
 
   sectionId String
   section   Section @relation(fields: [sectionId], references: [id], onDelete: Cascade)
@@ -131,13 +131,13 @@ model Progress {
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 
-  @@index([sectionId])
   @@unique([studentId, sectionId])
+  @@index([sectionId])
 }
 
 model Purchase {
   id         String @id @default(uuid())
-  customerId String 
+  customerId String
 
   courseId String
   course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
@@ -145,8 +145,8 @@ model Purchase {
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 
-  @@index([courseId])
   @@unique([customerId, courseId])
+  @@index([courseId])
 }
 
 model StripeCustomer {
