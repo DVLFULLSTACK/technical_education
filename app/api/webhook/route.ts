@@ -12,9 +12,9 @@ export const POST = async (req: NextRequest) => {
 
   try {
     event = stripe.webhooks.constructEvent(
-      rawBody,
-      signature,
-      process.env.STRIPE_WEBHOOK_SECRET!
+        rawBody,
+        signature,
+        process.env.STRIPE_WEBHOOK_SECRET!
     );
   } catch (err: any) {
     return new NextResponse(`Webhook error: ${err.message}`, { status: 400 });

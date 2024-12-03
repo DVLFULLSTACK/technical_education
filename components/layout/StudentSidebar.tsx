@@ -9,7 +9,7 @@ const StudentSidebar = () => {
 
     // Các route trong sidebar
     const sidebarRoutes = [
-        { icon: <Home />, label: "Trang chủ", path: "/student/home" },
+        { icon: <Home />, label: "Trang chủ", path: "/" },
         {
             icon: <GraduationCap />,
             label: "Lộ trình học",

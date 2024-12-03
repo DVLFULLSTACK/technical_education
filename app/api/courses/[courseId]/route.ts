@@ -9,8 +9,8 @@ const { video } = new Mux({
 });
 
 export const PATCH = async (
-  req: NextRequest,
-  { params }: { params: { courseId: string } }
+    req: NextRequest,
+    { params }: { params: { courseId: string } }
 ) => {
   try {
     const { userId } = auth();
@@ -34,8 +34,8 @@ export const PATCH = async (
 };
 
 export const DELETE = async (
-  req: NextRequest,
-  { params }: { params: { courseId: string } }
+    req: NextRequest,
+    { params }: { params: { courseId: string } }
 ) => {
   try {
     const { userId } = auth();

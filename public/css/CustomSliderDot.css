@@ -1,0 +1,36 @@
+/* Custom styles for the slider dots */
+.slick-dots {
+    position: absolute;
+    bottom: 20px; /* Adjust the position of dots */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex !important;
+    gap: 10px;
+    z-index: 10;
+}
+
+.slick-dots li {
+    list-style: none;
+}
+
+.slick-dots li button {
+    background-color: #fff; /* White background */
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.slick-dots li.slick-active button {
+    background-color: #4F46E5; /* Active dot color */
+    opacity: 1;
+    transform: scale(1.2); /* Slightly larger active dot */
+}
+
+/* Hover effect for dots */
+.slick-dots li button:hover {
+    opacity: 1;
+    background-color: #4F46E5; /* Hover color */
+}

@@ -2,6 +2,7 @@ import StudentSidebar from "@/components/layout/StudentSidebar"; // Sử dụng 
 import Topbar from "@/components/layout/Topbar";
 import Footer from "@/components/layout/Footer";
 
+
 const HomeLayout = ({ children }: { children: React.ReactNode }) => {
     return (
         <div className="h-screen flex flex-col">
@@ -20,8 +21,6 @@ const HomeLayout = ({ children }: { children: React.ReactNode }) => {
                 </div>
 
             </div>
-
-            {/* Footer */}
             <Footer />
         </div>
     );

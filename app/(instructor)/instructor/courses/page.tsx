@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { db } from "@/lib/db";
 import { DataTable } from "@/components/custom/DataTable";
 import { columns } from "@/components/courses/Columns";
-import Footer from "@/components/layout/Footer";
 const CoursesPage = async () => {
   const { userId } = auth();
 
@@ -32,8 +31,6 @@ const CoursesPage = async () => {
       <div className="mt-5">
         <DataTable columns={columns} data={courses} />
       </div>
-      {/* Footer */}
-      <Footer />
     </div>
   );
 };

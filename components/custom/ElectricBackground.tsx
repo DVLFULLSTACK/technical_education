@@ -107,7 +107,7 @@ export default function ElectricBackground() {
                 </h1>
                 <p className="text-base md:text-lg max-w-3xl mb-6 leading-relaxed text-gray-700">
                     Đây là một Group Facebook học tập và chia sẻ kiến thức về lập trình web miễn phí
-                    của Dược. Tại đây bạn có thể xem trước các video mình public trên Youtube 10
+                    của Đạt. Tại đây bạn có thể xem trước các video mình public trên Youtube 10
                     ngày và nhận được voucher giảm giá cho các khóa học của mình.
                 </p>
                 <button className="bg-black text-white font-semibold py-2 px-6 rounded-md shadow-md hover:bg-gray-800 transition">

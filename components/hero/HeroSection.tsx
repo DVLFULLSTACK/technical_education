@@ -5,26 +5,37 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa"; // Import mũi tên từ react-icons
 import styles from "./hero.module.css";
-
 // Dữ liệu slide
 const slides = [
     {
         title: "Học HTML CSS cho người mới 👑",
         description: "Thực hành dự án với Figma, hàng trăm bài tập và thử thách, hướng dẫn 100%.",
         buttonText: "HỌC THỬ MIỄN PHÍ",
-        imageUrl: "/web_development.jpg",
+        imageUrl: "/Slider/1.png",
     },
     {
         title: "Lập trình Fullstack 🚀",
         description: "Trở thành lập trình viên Fullstack chuyên nghiệp với lộ trình chi tiết.",
         buttonText: "KHÁM PHÁ KHÓA HỌC",
-        imageUrl: "/Nutrition Banner.png",
+        imageUrl: "/Slider/2.png",
     },
     {
         title: "Học từ xa 🌏",
         description: "Học lập trình từ bất kỳ đâu với các khóa học chất lượng cao từ TechNical.",
         buttonText: "BẮT ĐẦU NGAY",
-        imageUrl: "/web_development.jpg",
+        imageUrl: "/Slider/3.png",
+    },
+    {
+        title: "Mở bán khóa JavaScript Pro 👑",
+        description: "Học lập trình từ bất kỳ đâu với các khóa học chất lượng cao từ TechNical.",
+        buttonText: "BẮT ĐẦU NGAY",
+        imageUrl: "/Slider/4.png",
+    },
+    {
+        title: "Mở bán khóa JavaScript Pro 👑",
+        description: "Học lập trình từ bất kỳ đâu với các khóa học chất lượng cao từ TechNical.",
+        buttonText: "BẮT ĐẦU NGAY",
+        imageUrl: "/Slider/5.png",
     },
 ];
 
@@ -35,16 +46,21 @@ const PrevArrow = ({ onClick }: { onClick?: () => void }) => (
     // >
     <button
         onClick={onClick}
-        className="absolute top-1"
+        className="absolute z-20 top-1/2 p-3 rounded-full bg-white left-11 shadow-md"
     >
         <FaArrowLeft className="text-black text-lg"/>
     </button>
 );
 
 const NextArrow = ({onClick}: { onClick?: () => void }) => (
+    // <button
+    //     onClick={onClick}
+    //     className="absolute right-[-60px] top-1/2 transform -translate-y-1/2 z-20 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-md hover:bg-gray-100 transition"
+    // >
+
     <button
         onClick={onClick}
-        className="absolute right-[-60px] top-1/2 transform -translate-y-1/2 z-20 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-md hover:bg-gray-100 transition"
+        className="absolute z-20 top-1/2 p-3 rounded-full bg-white right-11 shadow-md"
     >
         <FaArrowRight className="text-black text-lg" />
     </button>
@@ -55,7 +71,7 @@ export default function HeroSection() {
         dots: true,
         arrows: true,
         infinite: true,
-        speed: 500,
+        speed: 800,
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,
@@ -63,18 +79,20 @@ export default function HeroSection() {
         prevArrow: <PrevArrow />,
         nextArrow: <NextArrow />,
         appendDots: (dots: React.ReactNode) => (
-            <div className="custom-dots flex items-center gap-4 relative">
-                {dots}
+            <div>
+                <div className="w-10 h-8 gap-5 flex absolute -bottom-5 slider-dots">
+                    {dots}
+                </div>
             </div>
         ),
         customPaging: () => (
-            <div className="w-8 h-2 rounded-full bg-gray-300 transition-transform duration-300 ease-in-out"></div>
+            <div className="w-8 h-2 rounded-full bg-gray-300 transition-all duration-300 ease-in-out custom-dot-active"></div>
         ),
     };
 
     return (
-        <div className="w-full h-[400px] rounded-lg overflow-hidden shadow-lg">
-            <Slider {...settings}>
+        <div className="w-full h-[430px] rounded-lg overflow-hidden">
+            <Slider {...settings} className="md:px-10 xl:px-16">
                 {slides.map((slide, index) => (
                     <div key={index} className="relative w-full h-[400px]">
                         <img
@@ -94,6 +112,5 @@ export default function HeroSection() {
             </Slider>
         </div>
     );
-
 }
 

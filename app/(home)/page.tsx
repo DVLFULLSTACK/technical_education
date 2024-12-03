@@ -4,7 +4,6 @@ import Categories from "@/components/custom/Categories";
 import CourseCard from "@/components/courses/CourseCard";
 import HeroSection from "@/components/hero/HeroSection";
 import ElectricBackground from "@/components/custom/ElectricBackground";
-import Footer from "@/components/layout/Footer";
 
 export default async function Home() {
     // Truy vấn danh mục từ cơ sở dữ liệu
@@ -27,9 +26,14 @@ export default async function Home() {
     return (
         <div className="flex flex-col min-h-screen">
             {/* Nội dung chính */}
-            <main className="md:mt-5 md:px-10 xl:px-16 pb-16 space-y-10 flex-1">
+
+            <div className="">
                 {/* Hero Section */}
                 <HeroSection />
+            </div>
+
+            <main className="md:mt-5 md:px-10 xl:px-16 pb-16 space-y-10 flex-1">
+
 
                 {/* Danh sách khóa học */}
                 <section>
@@ -58,8 +62,6 @@ export default async function Home() {
                     <ElectricBackground />
                 </section>
             </main>
-
-
         </div>
     );
 }
