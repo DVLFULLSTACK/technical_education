@@ -28,3 +28,10 @@
 .slick-slider .slick-list {
     padding: 0 20px; /* Khoảng cách nội bộ để không che mũi tên */
 }
+
+
+.slick-active .custom-dot-active{
+    background-color: #B4BCC3 !important;
+    width: 40px !important;
+}
+

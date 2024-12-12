@@ -40,7 +40,7 @@ export default async function Home() {
                     <h2 className="text-2xl font-bold text-gray-800 mb-6">
                         Khóa học nổi bật
                     </h2>
-                    <div className="flex flex-wrap gap-7 justify-center">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5 justify-center">
                         {courses.length > 0 ? (
                             courses.map((course) => (
                                 <CourseCard key={course.id} course={course} />
