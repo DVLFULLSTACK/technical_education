@@ -157,3 +157,35 @@ model StripeCustomer {
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 }
+
+model Post {
+  id        String    @id @default(uuid()) // ID bài đăng
+  content   String    @db.Text            // Nội dung bài đăng
+  postName  String?   @db.Text            // URL hình ảnh (nếu có)
+  authorId  String                          // ID người đăng bài (chỉ lưu userId)
+  comments  Comment[]                      // Danh sách bình luận
+  likes     Like[]                         // Danh sách lượt thích
+  isActive  Boolean @default(false)
+  createdAt DateTime  @default(now())      // Thời gian tạo bài
+  updatedAt DateTime  @default(now())      // Thời gian cập nhật
+}
+
+model Comment {
+  id        String    @id @default(uuid()) // ID bình luận
+  content   String    @db.Text            // Nội dung bình luận
+  postId    String                          // ID bài đăng liên quan
+  post      Post      @relation(fields: [postId], references: [id], onDelete: Cascade) // Quan hệ với Post
+  authorId  String                          // ID người bình luận (chỉ lưu userId)
+  createdAt DateTime  @default(now())      // Thời gian tạo bình luận
+  updatedAt DateTime  @default(now())      // Thời gian cập nhật
+}
+
+model Like {
+  id        String    @id @default(uuid()) // ID lượt thích
+  postId    String                          // ID bài đăng được thích
+  post      Post      @relation(fields: [postId], references: [id], onDelete: Cascade) // Quan hệ với Post
+  userId    String                          // ID người dùng thích bài đăng (chỉ lưu userId)
+  createdAt DateTime  @default(now())      // Thời gian thích bài đăng
+
+  @@unique([postId, userId])               // Một người dùng chỉ thích một bài một lần
+}

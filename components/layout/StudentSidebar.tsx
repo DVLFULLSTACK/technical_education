@@ -1,6 +1,6 @@
 "use client";
 
-import { Home, GraduationCap, Edit } from "lucide-react";
+import { Home, GraduationCap, Edit, UsersRound } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -16,6 +16,8 @@ const StudentSidebar = () => {
             path: "/student/learning-path",
         },
         { icon: <Edit />, label: "Bài viết", path: "/student/articles" },
+        { icon: <UsersRound />, label: "Diễn đàn", path: "/forum" },
+
     ];
 
     return (

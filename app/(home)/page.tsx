@@ -4,7 +4,11 @@ import Categories from "@/components/custom/Categories";
 import CourseCard from "@/components/courses/CourseCard";
 import HeroSection from "@/components/hero/HeroSection";
 import ElectricBackground from "@/components/custom/ElectricBackground";
-
+import { Metadata } from "next";
+export const metadata: Metadata = {
+    title: "TechNical Education",
+    description: "Thực học - Thực danh - Thực nghiệp",
+  };
 export default async function Home() {
     // Truy vấn danh mục từ cơ sở dữ liệu
     const categories = await db.category.findMany({
