@@ -4,28 +4,38 @@ export default function ProfilePage() {
     return (
         <div className="bg-gray-100 min-h-screen">
             {/* Header */}
-            <div className="relative h-48 w-full bg-gradient-to-r from-blue-400 to-pink-400 rounded-b-lg shadow-lg">
-                <h1 className="absolute top-8 left-8 text-white text-3xl font-semibold">
-                    document.write('Hello, World!');
-                </h1>
-                {/* Avatar đan xen */}
-                <div className="absolute -bottom-12 left-10 w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-xl">
-                    <img
-                        src="/avatar_placeholder.jpg"
-                        alt="Profile Avatar"
-                        className="object-cover w-full h-full"
-                    />
+            <div className="container px-6 lg:px-20">
+                <div
+                    className="relative h-48 w-full bg-gradient-to-r from-blue-400 to-pink-400 rounded-b-2xl shadow-lg px-8">
+                    <h1 className="absolute top-8 text-white text-3xl font-semibold w-full">
+                        document.write('Hello, World!');
+                    </h1>
+                    {/* Avatar đan xen */}
+
+                    <div className="w-full absolute -bottom-16 flex items-end gap-6">
+                        <div
+                            className=" w-36 h-36 rounded-full overflow-hidden border-4 border-white shadow-xl">
+                            <img
+                                src="/avatar_placeholder.jpg"
+                                alt="Profile Avatar"
+                                className="object-cover w-full h-full"
+                            />
+                        </div>
+                        <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                            Sơn Đặng{" "}
+                            <span className="text-blue-500 ml-2">✔</span>
+                        </h2>
+                    </div>
+
+
                 </div>
             </div>
 
             {/* Main Content */}
-            <div className="container mx-auto mt-16 px-6 lg:px-20 grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="container mx-auto mt-24   px-6 lg:px-20 grid grid-cols-1 lg:grid-cols-3 gap-8">
                 {/* Left Side - Profile Info */}
                 <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                    <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
-                        Sơn Đặng{" "}
-                        <span className="text-blue-500 ml-2">✔</span>
-                    </h2>
+
                     <p className="italic text-gray-600 mb-4">Stop thinking, start doing!</p>
                     <ul className="text-blue-500 space-y-2">
                         <li>🔗 <a href="#">https://fullstack.edu.vn</a></li>
