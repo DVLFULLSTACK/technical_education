@@ -20,7 +20,9 @@ import { Spin } from "../ui/loader";
 import toast from "react-hot-toast";
 import { UserCard } from "./user-card";
 import { Quill } from "react-quill";
-import Editor from "./editor";
+const Editor = dynamic(() => import("./editor"), {
+  ssr: false,  // Tắt SSR cho Editor
+});
 import { Label } from "@/components/ui/label";
 
 // const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });

@@ -27,7 +27,7 @@ const StudentSidebar = () => {
                     key={route.path}
                     className={`flex items-center gap-4 p-4 rounded-lg hover:bg-[#FDAB04] hover:text-white transition-colors duration-300
                       ${
-                        pathname.startsWith(route.path)
+                        pathname === route.path
                             ? "bg-[#FDAB04] text-white"
                             : "text-gray-700"
                     }`}
