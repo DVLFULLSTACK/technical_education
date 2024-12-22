@@ -18,6 +18,8 @@ const config = {
       },
     },
     extend: {
+
+
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -97,12 +99,30 @@ const config = {
           "50%": { backgroundPosition: "100% 50%" },
           "100%": { backgroundPosition: "0% 50%" },
         },
+        float: {
+          "0%": { transform: "translateY(0) scale(1)", opacity: "1" },
+          "100%": { transform: "translateY(-150px) scale(1.2)", opacity: "0" },
+        },
+        'svg-filled': {
+          '0%': { transform: 'scale(0)' },
+          '25%': { transform: 'scale(1.2)' },
+          '50%': { transform: 'scale(1)', filter: 'brightness(1.5)' },
+        },
+        // Keyframe cho svg-celebrate
+        'svg-celebrate': {
+          '0%': { transform: 'scale(0)', opacity: '1' },
+          '50%': { transform: 'scale(1.4)', opacity: '1', filter: 'brightness(1.5)' },
+          '100%': { transform: 'scale(1.4)', opacity: '0' },
+        },
       },
       animation: {
         electric: "electric 12s cubic-bezier(0.4, 0, 0.2, 1) infinite",
         galaxySpin: "galaxySpin 20s linear infinite",
         twinkle: "twinkle 2s ease-in-out infinite",
         gradientMove: "gradientMove 8s linear infinite",
+        float: "float 3s ease-in-out forwards",
+        'svg-filled': 'svg-filled 1s ease-in-out',
+        'svg-celebrate': 'svg-celebrate 0.5s forwards',
       },
     },
   },
