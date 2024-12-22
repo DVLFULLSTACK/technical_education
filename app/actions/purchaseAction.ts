@@ -27,7 +27,8 @@ const purchaseAction = {
   // Tạo mới danh mục
   create: async (purchase: PurchaseFormInputs): Promise<ApiResponse<Purchase>> => {
     try {
-      const response = await fetch(API_URL, {
+      console.log(API_URL)
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/${API_URL}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -36,9 +37,10 @@ const purchaseAction = {
       });
 
       if (!response.ok) {
+        console.log('Wrong???')
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-
+      console.log('Testfasf')
       const result: ApiResponse<Purchase> = await response.json();
       return result;
     } catch (error) {

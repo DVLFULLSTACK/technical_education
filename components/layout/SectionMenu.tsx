@@ -13,7 +13,7 @@ const SectionMenu = ({ course }: SectionMenuProps) => {
     <div className="z-60 md:hidden">
       <Sheet>
         <SheetTrigger>
-          <Button>Các phần học</Button>
+          <div>Các phần học</div>
         </SheetTrigger>
         <SheetContent className="flex flex-col">
           <Link
