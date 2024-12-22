@@ -10,9 +10,9 @@ const userAction = {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      console.log('Res: ',response)
+
       const result: ApiResponse<User[]> = await response.json();
-      console.log('Tes: ',result)
+
       return result;
     } catch (error) {
       console.error(error);
@@ -28,9 +28,7 @@ const userAction = {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      console.log('Res: ',response)
       const result: ApiResponse<User[]> = await response.json();
-      console.log('Tes: ',result)
       return result;
     } catch (error) {
       console.error(error);
@@ -46,9 +44,7 @@ const userAction = {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      console.log(response)
       const result: ApiResponse<User> = await response.json();
-      console.log('Check: ',result)
       return result;
     } catch (error) {
       console.error(`Error fetching user with ID ${id}:`, error);

@@ -12,13 +12,16 @@ import toast from "react-hot-toast";
 import { useState } from "react";
 import axios from "axios";
 import { File, Loader2, Lock } from "lucide-react";
-
+import { FileResource } from "./FileResource";
 import { Button } from "@/components/ui/button";
 import ReadText from "@/components/custom/ReadText";
 import MuxPlayer from "@mux/mux-player-react";
 import Link from "next/link";
 import ProgressButton from "./ProgressButton";
 import SectionMenu from "../layout/SectionMenu";
+import YouTubePlayer from "./YoutubePlayer";
+import PDFViewer from "./PDFViewer";
+import { Card} from "@/components/ui/card"
 
 interface SectionsDetailsProps {
   course: Course & { sections: Section[] };
@@ -39,7 +42,7 @@ const SectionsDetails = ({
 }: SectionsDetailsProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const isLocked = !purchase && !section.isFree;
-
+  console.log('Course: ',course)
   const buyCourse = async () => {
     try {
       setIsLoading(true);
@@ -54,7 +57,8 @@ const SectionsDetails = ({
   };
 
   return (
-    <div className="px-6 py-4 flex flex-col gap-5">
+    <div className="grid grid-cols-[2fr_1fr] px-2 gap-2">
+       <Card className="px-6 py-4 flex flex-col gap-5">
       <div className="flex flex-col md:flex-row md:justify-between md:items-center">
         <h1 className="text-2xl font-bold max-md:mb-4">{section.title}</h1>
 
@@ -88,27 +92,35 @@ const SectionsDetails = ({
           </p>
         </div>
       ) : (
-        <MuxPlayer
-          playbackId={muxData?.playbackId || ""}
-          className="md:max-w-[600px]"
-        />
+        // <MuxPlayer
+        //   playbackId={muxData?.playbackId || ""}
+        //   className="md:max-w-[600px]"
+        // />
+        <YouTubePlayer linkVideo={section.videoUrl || ""} />
       )}
 
-      <div>
+      <div className="space-y-8">
         <h2 className="text-xl font-bold mb-5">Tài liệu hỗ trợ</h2>
         {resources.map((resource) => (
-          <Link
-            key={resource.id}
-            href={resource.fileUrl}
-            target="_blank"
-            className="flex items-center bg-[#FFF8EB] rounded-lg text-sm font-medium p-3"
-          >
-            <File className="h-4 w-4 mr-4" />
-            {resource.name}
-          </Link>
+          <FileResource key={resource.id} resource={resource}/>
         ))}
       </div>
+    </Card>
+    <Card className="px-6 py-4 space-y-8">
+    <h1 className="text-2xl font-bold max-md:mb-4">Exercise</h1>
+    <div className="text-center space-y-4">
+    <p className="text-gray-400 italic">Nhấn vào nút bên dưới để làm bài tập!</p>
+    <Button asChild>
+      <Link target="_blank"
+      href={"https://leetclone.vercel.app/"}>
+      Bài tập
+      </Link>
+    </Button>
     </div>
+
+    </Card>
+    </div>
+
   );
 };
 

@@ -105,6 +105,29 @@ const courseAction = {
       throw error;
     }
   },
+
+  checkout: async (id: string): Promise<ApiResponse<any>> => {
+    const courseId = id
+    try {
+      const response = await fetch(`${API_URL}/${courseId}/checkout`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result: ApiResponse<any> = await response.json();
+      return result;
+    } catch (error) {
+      console.error(`Error updating course with id ${id}:`, error);
+      throw error;
+    }
+  },
 };
 
 export default courseAction;

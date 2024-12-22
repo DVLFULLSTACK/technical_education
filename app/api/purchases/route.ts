@@ -4,7 +4,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { clerkClient } from "@clerk/nextjs/server";
 
 
-
 export const POST = async (req: NextRequest) => {
   try {
     console.log('testasfsafas')

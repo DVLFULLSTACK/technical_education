@@ -12,6 +12,9 @@ import { Level } from "@/components/courses/Level";
 import purchaseAction from "@/app/actions/purchaseAction";
 import { auth } from "@clerk/nextjs/server";
 import toast from "react-hot-toast"
+import axios from "axios";
+import courseAction from "@/app/actions/courseAction";
+import { CourseRegister } from "@/components/courses/CourseRegister";
 export const metadata = {
   title: "Tổng quan khóa học"
 }
@@ -20,7 +23,7 @@ const CourseOverview = async ({ params, searchParams }: { params: { courseId: st
 
   const { userId} = auth()
   if (searchParams && searchParams.success==="true") {
-    console.log('Test')
+
     try {
       await purchaseAction.create({
         customerId: userId || "",
@@ -64,7 +67,8 @@ const CourseOverview = async ({ params, searchParams }: { params: { courseId: st
       },
     });
   }
-  console.log('Check: ',course)
+
+
   return (
     <div className="grid grid-cols-[3fr_2fr]">
       <div className="px-6 py-4 flex flex-col gap-5 text-sm">
@@ -110,23 +114,7 @@ const CourseOverview = async ({ params, searchParams }: { params: { courseId: st
         </div>
       </div>
       <div className="p-8 text-center space-y-8">
-      <Card className="w-120 h-52 relative rounded-lg overflow-hidden">
-        <div className="absolute top-2 right-2 z-10  px-2 py-1">
-          <Level levelName={level?.name || ""}/>
-        </div>
-        <Image
-          src={course.imageUrl || ""}
-          alt=""
-          layout="fill"
-          className="rounded-lg object-cover"
-        />
-      </Card>
-        <div className="space-y-4">
-          <p className="font-bold text-2xl text-orange-300">{course.price} $</p>
-          <Button>
-            ĐĂNG KÝ HỌC
-          </Button>
-        </div>
+     <CourseRegister levelName={level?.name || ""} course={course} />
       </div>
     </div>
   );

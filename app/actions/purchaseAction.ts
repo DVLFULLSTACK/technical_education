@@ -27,7 +27,6 @@ const purchaseAction = {
   // Tạo mới danh mục
   create: async (purchase: PurchaseFormInputs): Promise<ApiResponse<Purchase>> => {
     try {
-      console.log(API_URL)
       const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/${API_URL}`, {
         method: "POST",
         headers: {
@@ -37,10 +36,8 @@ const purchaseAction = {
       });
 
       if (!response.ok) {
-        console.log('Wrong???')
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      console.log('Testfasf')
       const result: ApiResponse<Purchase> = await response.json();
       return result;
     } catch (error) {
@@ -107,6 +104,22 @@ const purchaseAction = {
       throw error;
     }
   },
+
+  checkExist: async ({courseId, userId} : {courseId: string, userId: string}) :Promise<ApiResponse<{isRegister: boolean}>> => {
+    try {
+      const response = await fetch(`${API_URL}/course/${courseId}/user/${userId}`, { method: "POST" });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result: ApiResponse<{isRegister: boolean}> = await response.json();
+      return result;
+    } catch (error) {
+      console.error(`Error fetching purchase with id ${courseId}:`, error);
+      throw error;
+    }
+  }
 };
 
 export default purchaseAction;
