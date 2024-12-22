@@ -21,14 +21,14 @@ const CourseCard = async ({ course }: { course: Course }) => {
   return (
     <Link
       href={`/courses/${course.id}/overview`}
-      className="border rounded-lg cursor-pointer"
+      className="border rounded-lg cursor-pointer hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
     >
       <Image
         src={course.imageUrl ? course.imageUrl : "/image_placeholder.webp"}
         alt={course.title}
         width={500}
         height={300}
-        className="rounded-t-xl w-[320px] h-[180px] object-cover"
+        className="rounded-t-xl w-full object-cover aspect-[4/2]"
       />
       <div className="px-4 py-3 flex flex-col gap-2">
         <h2 className="text-lg font-bold hover:[#FDAB04]">{course.title}</h2>
