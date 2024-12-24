@@ -20,6 +20,7 @@ import { ComboBox } from "@/components/custom/ComboBox";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { Loader2 } from "lucide-react";
+import { useUser } from "@clerk/nextjs";
 
 const formSchema = z.object({
   title: z.string().min(2, {
@@ -31,6 +32,7 @@ const formSchema = z.object({
   subCategoryId: z.string().min(1, {
     message: "Subcategory is required",
   }),
+  instructorId: z.string()
 });
 
 interface CreateCourseFormProps {
@@ -43,6 +45,7 @@ interface CreateCourseFormProps {
 
 const CreateCourseForm = ({ categories }: CreateCourseFormProps) => {
   const router = useRouter();
+  const { user} = useUser()
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -51,6 +54,7 @@ const CreateCourseForm = ({ categories }: CreateCourseFormProps) => {
       title: "",
       categoryId: "",
       subCategoryId: "",
+      instructorId: user?.id || ""
     },
   });
 

@@ -5,25 +5,30 @@ import { useQuery } from "@tanstack/react-query"
 import postAction from "@/app/actions/postAction";
 import { Spin } from "../ui/loader";
 
-export function PostList () {
+export function PostList() {
   const { data: posts, isLoading } = useQuery({
     queryKey: ["getPosts"],
     queryFn: postAction.getAll,
   });
-  if (isLoading) return
 
-    <Spin className="mt-4"/>
+  if (isLoading)
+    return (
+        <div className="flex justify-center items-center py-10">
+          <Spin />
+        </div>
+    );
 
   return (
-    <div className="py-8 space-y-8">
-      {
-        posts?.data.map(post => (
-          post.isActive &&
-          <Post key={post.id} post={post}/>
-        ))
-      }
-
-
-    </div>
-  )
+      <div className="space-y-6">
+        {posts?.data.map(
+            (post) =>
+                post.isActive && (
+                    <div key={post.id} className="bg-white p-6 rounded-lg shadow-md">
+                      <Post post={post} />
+                    </div>
+                )
+        )}
+      </div>
+  );
 }
+

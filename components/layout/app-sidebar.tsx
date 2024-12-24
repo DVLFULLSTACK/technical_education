@@ -45,7 +45,7 @@ const items = [
   },
   {
     title: "Statistic",
-    url: "#",
+    url: "/admin/statistic",
     icon: ChartSpline,
   },
   {

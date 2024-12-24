@@ -28,7 +28,7 @@ import { Switch } from "@/components/ui/switch";
 import ResourceForm from "@/components/sections/ResourceForm";
 import Delete from "@/components/custom/Delete";
 import PublishButton from "@/components/custom/PublishButton";
-
+import YouTubePlayer from "./YoutubePlayer";
 const formSchema = z.object({
   title: z.string().min(2, {
     message: "Tiêu đề là bắt buộc và phải có ít nhất 2 ký tự",
@@ -147,10 +147,11 @@ const EditSectionForm = ({
 
           {section.videoUrl && (
             <div className="my-5">
-              <MuxPlayer
+              {/* <MuxPlayer
                 playbackId={section.muxData?.playbackId || ""}
                 className="md:max-w-[600px]"
-              />
+              /> */}
+              <YouTubePlayer linkVideo={section.videoUrl}/>
             </div>
           )}
           <FormField
@@ -162,12 +163,15 @@ const EditSectionForm = ({
                   Video <span className="text-red-500">*</span>
                 </FormLabel>
                 <FormControl>
-                  <FileUpload
+                  <Input  placeholder="Link youtube"
+                  {...field}
+                  />
+                  {/* <FileUpload
                     value={field.value || ""}
                     onChange={(url) => field.onChange(url)}
                     endpoint="sectionVideo"
                     page="Edit Section"
-                  />
+                  /> */}
                 </FormControl>
                 <FormMessage />
               </FormItem>
