@@ -8,9 +8,9 @@ async function main() {
         name: "IT & Software",
         subCategories: {
           create: [
-            { name: "Web Development" },
-            { name: "Data Science" },
-            { name: "Cybersecurity" },
+            { name: "Front-End" },
+            { name: "Back-End" },
+            { name: "API" },
             { name: "Others" },
           ],
         },

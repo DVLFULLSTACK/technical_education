@@ -28,15 +28,15 @@ import PublishButton from "../custom/PublishButton";
 
 const formSchema = z.object({
     title: z.string().min(2, {
-        message: "Title is required and must be at least 2 characters long",
+        message: "Tiêu đề là bắt buộc và phải có ít nhất 2 ký tự",
     }),
     subtitle: z.string().optional(),
     description: z.string().optional(),
     categoryId: z.string().min(1, {
-        message: "Category is required",
+        message: "Danh mục là bắt buộc",
     }),
     subCategoryId: z.string().min(1, {
-        message: "Subcategory is required",
+        message: "Danh mục phụ là bắt buộc",
     }),
     levelId: z.string().optional(),
     imageUrl: z.string().optional(),
@@ -84,20 +84,20 @@ const EditCourseForm = ({
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
             await axios.patch(`/api/courses/${course.id}`, values);
-            toast.success("Course Updated");
+            toast.success("Cập nhật khóa học thành công");
             router.refresh();
         } catch (err) {
             console.log("Failed to update the course", err);
-            toast.error("Something went wrong!");
+            toast.error("Đã xảy ra lỗi!");
         }
     };
 
     const routes = [
         {
-            label: "Basic Information",
+            label: "Thông tin cơ bản",
             path: `/instructor/courses/${course.id}/basic`,
         },
-        { label: "Curriculum", path: `/instructor/courses/${course.id}/sections` },
+        { label: "Nội dung khóa học", path: `/instructor/courses/${course.id}/sections` },
     ];
 
     return (
@@ -132,7 +132,7 @@ const EditCourseForm = ({
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>
-                                    Title <span className="text-red-500">*</span>
+                                    Tiêu đề <span className="text-red-500">*</span>
                                 </FormLabel>
                                 <FormControl>
                                     <Input
@@ -150,7 +150,7 @@ const EditCourseForm = ({
                         name="subtitle"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Subtitle</FormLabel>
+                                <FormLabel>Phụ đề</FormLabel>
                                 <FormControl>
                                     <Input
                                         placeholder="Ex: Become a Full-stack Developer with just ONE course. HTML, CSS, Javascript, Node, React, MongoDB and more!"
@@ -168,11 +168,11 @@ const EditCourseForm = ({
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>
-                                    Description <span className="text-red-500">*</span>
+                                    Mô tả <span className="text-red-500">*</span>
                                 </FormLabel>
                                 <FormControl>
                                     <RichEditor
-                                        placeholder="What is this course about?"
+                                        placeholder="Khóa học này nói về điều gì?"
                                         {...field}
                                     />
                                 </FormControl>
@@ -188,7 +188,7 @@ const EditCourseForm = ({
                             render={({ field }) => (
                                 <FormItem className="flex flex-col">
                                     <FormLabel>
-                                        Category <span className="text-red-500">*</span>
+                                        Danh mục <span className="text-red-500">*</span>
                                     </FormLabel>
                                     <FormControl>
                                         <ComboBox options={categories} {...field} />
@@ -204,7 +204,7 @@ const EditCourseForm = ({
                             render={({ field }) => (
                                 <FormItem className="flex flex-col">
                                     <FormLabel>
-                                        Subcategory <span className="text-red-500">*</span>
+                                        Danh mục phụ <span className="text-red-500">*</span>
                                     </FormLabel>
                                     <FormControl>
                                         <ComboBox
@@ -228,7 +228,7 @@ const EditCourseForm = ({
                             render={({ field }) => (
                                 <FormItem className="flex flex-col">
                                     <FormLabel>
-                                        Level <span className="text-red-500">*</span>
+                                        Cấp độ <span className="text-red-500">*</span>
                                     </FormLabel>
                                     <FormControl>
                                         <ComboBox options={levels} {...field} />
@@ -245,7 +245,7 @@ const EditCourseForm = ({
                         render={({ field }) => (
                             <FormItem className="flex flex-col">
                                 <FormLabel>
-                                    Couse Banner <span className="text-red-500">*</span>
+                                    Hình ảnh khóa học <span className="text-red-500">*</span>
                                 </FormLabel>
                                 <FormControl>
                                     <FileUpload
@@ -266,7 +266,7 @@ const EditCourseForm = ({
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>
-                                    Price <span className="text-red-500">*</span> (USD)
+                                    Giá <span className="text-red-500">*</span> (USD)
                                 </FormLabel>
                                 <FormControl>
                                     <Input
