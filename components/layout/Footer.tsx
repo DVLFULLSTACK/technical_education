@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import { FaFacebookF, FaInstagram, FaYoutube, FaTiktok } from "react-icons/fa";
 
 export default function Footer() {
     return (
@@ -18,7 +19,13 @@ export default function Footer() {
                             <li>135/8 Thạnh Xuân 21, Q12, TP Hồ Chí Minh</li>
                         </ul>
                         <div className="mt-4">
-                            <Image src="/dmca_protected.png" alt="DMCA" className="w-16" />
+                            <Image
+                                src="/dmca_protected.png"
+                                alt="DMCA"
+                                width={64}
+                                height={64}
+                                className="w-16"
+                            />
                         </div>
                     </div>
 
@@ -62,16 +69,16 @@ export default function Footer() {
                     </p>
                     <div className="flex items-center space-x-4 mt-4 md:mt-0">
                         <a href="#" aria-label="Facebook" className="hover:text-white transition-colors">
-                            <i className="fab fa-facebook-f text-lg"></i>
+                            <FaFacebookF className="text-lg" />
                         </a>
                         <a href="#" aria-label="Instagram" className="hover:text-white transition-colors">
-                            <i className="fab fa-instagram text-lg"></i>
+                            <FaInstagram className="text-lg" />
                         </a>
                         <a href="#" aria-label="YouTube" className="hover:text-white transition-colors">
-                            <i className="fab fa-youtube text-lg"></i>
+                            <FaYoutube className="text-lg" />
                         </a>
                         <a href="#" aria-label="TikTok" className="hover:text-white transition-colors">
-                            <i className="fab fa-tiktok text-lg"></i>
+                            <FaTiktok className="text-lg" />
                         </a>
                     </div>
                 </div>

@@ -102,10 +102,6 @@ export default function CourseForm({ courseId }: { courseId?: string }) {
     enabled: !!watch("categoryId")
   });
 
-
-
-
-
   const onSubmit = async (data: CourseFormInputs) => {
     try {
       data.price = parseFloat(String(data.price))
