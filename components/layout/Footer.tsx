@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 
 export default function Footer() {
     return (
@@ -17,7 +18,7 @@ export default function Footer() {
                             <li>135/8 Thạnh Xuân 21, Q12, TP Hồ Chí Minh</li>
                         </ul>
                         <div className="mt-4">
-                            <img src="/dmca_protected.png" alt="DMCA" className="w-16" />
+                            <Image src="/dmca_protected.png" alt="DMCA" className="w-16" />
                         </div>
                     </div>
 

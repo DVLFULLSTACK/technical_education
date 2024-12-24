@@ -87,9 +87,6 @@ export function CourseTable() {
           columnName: "title",
         },
         accessorKey: "title",
-
-
-
       },
       {
         header: "Level",

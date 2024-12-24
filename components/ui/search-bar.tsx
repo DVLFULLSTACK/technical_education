@@ -255,6 +255,7 @@ const SearchBarButton = forwardRef<HTMLButtonElement, ButtonProps>((
 ) => {
   const { handleSearch } = useSearchBar()
 
+
   return (
     <Button
       ref={ref}
