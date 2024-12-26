@@ -1,103 +1,79 @@
 "use client";
 
-export default function ProfilePage() {
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa"; // Import mũi tên từ react-icons
+import "./customSlider.css";
+// import "../../public/css/CustomSliderDot.css";
+
+// Dữ liệu slide
+const slides = [
+    { imageUrl: "/Slider/1.png" },
+    { imageUrl: "/Slider/2.png" },
+    { imageUrl: "/Slider/3.png" },
+    { imageUrl: "/Slider/4.png" },
+    { imageUrl: "/Slider/5.png" },
+    { imageUrl: "/Slider/6.png" },
+    { imageUrl: "/Slider/7.png" },
+];
+
+const PrevArrow = ({ onClick }: { onClick?: () => void }) => (
+    <button
+        onClick={onClick}
+        className="absolute z-20 top-1/2 p-3 rounded-full bg-white left-11 shadow-md"
+    >
+        <FaArrowLeft className="text-black text-lg" />
+    </button>
+);
+
+const NextArrow = ({ onClick }: { onClick?: () => void }) => (
+    <button
+        onClick={onClick}
+        className="absolute z-20 top-1/2 p-3 rounded-full bg-white right-11 shadow-md"
+    >
+        <FaArrowRight className="text-black text-lg" />
+    </button>
+);
+
+export default function HeroSection() {
+    const settings = {
+        dots: true,
+        arrows: true,
+        infinite: true,
+        speed: 800,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        prevArrow: <PrevArrow />,
+        nextArrow: <NextArrow />,
+        appendDots: (dots: React.ReactNode) => (
+            <div>
+                <div className="w-10 h-8 gap-5 flex absolute -bottom-5 slider-dots">
+                    {dots}
+                </div>
+            </div>
+        ),
+        customPaging: () => (
+            <div className="w-8 h-2 rounded-full bg-gray-300 transition-all duration-300 ease-in-out custom-dot-active"></div>
+        ),
+    };
+
     return (
-        <div className="bg-gray-100 min-h-screen">
-            {/* Header */}
-            <div className="container px-6 lg:px-20">
-                <div
-                    className="relative h-48 w-full bg-gradient-to-r from-blue-400 to-pink-400 rounded-b-2xl shadow-lg px-8">
-                    <h1 className="absolute top-8 text-white text-3xl font-semibold w-full">
-                        document.write('Hello, World!');
-                    </h1>
-                    {/* Avatar đan xen */}
-
-                    <div className="w-full absolute -bottom-16 flex items-end gap-6">
-                        <div
-                            className=" w-36 h-36 rounded-full overflow-hidden border-4 border-white shadow-xl">
-                            <img
-                                src="/avatar_placeholder.jpg"
-                                alt="Profile Avatar"
-                                className="object-cover w-full h-full"
-                            />
-                        </div>
-                        <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
-                            Sơn Đặng{" "}
-                            <span className="text-blue-500 ml-2">✔</span>
-                        </h2>
+        <div className="w-full h-[430px] rounded-lg overflow-hidden">
+            <Slider {...settings} className="md:px-10 xl:px-16">
+                {slides.map((slide, index) => (
+                    <div key={index} className="relative w-full h-[400px]">
+                        <img
+                            src={slide.imageUrl}
+                            alt={`Slide ${index + 1}`}
+                            className="object-cover w-full h-full rounded-lg"
+                        />
+                        <div className="absolute inset-0 bg-black opacity-50"></div>
                     </div>
-
-
-                </div>
-            </div>
-
-            {/* Main Content */}
-            <div className="container mx-auto mt-24   px-6 lg:px-20 grid grid-cols-1 lg:grid-cols-3 gap-8">
-                {/* Left Side - Profile Info */}
-                <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
-
-                    <p className="italic text-gray-600 mb-4">Stop thinking, start doing!</p>
-                    <ul className="text-blue-500 space-y-2">
-                        <li>🔗 <a href="#">https://fullstack.edu.vn</a></li>
-                        <li>🔗 <a href="#">https://github.com/sondnpt00343</a></li>
-                        <li>🔗 <a href="#">https://facebook.com/sondnf8</a></li>
-                        <li>🔗 <a href="#">https://youtube.com/F8VNOfficial</a></li>
-                        <li>🔗 <a href="#">https://tiktok.com/@f8official</a></li>
-                    </ul>
-                </div>
-
-                {/* Right Side - Courses and Activities */}
-                <div className="lg:col-span-2 space-y-6">
-                    {/* Courses */}
-                    <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                        <h3 className="text-xl font-bold text-gray-800 mb-4">Các khóa học đã tham gia</h3>
-                        <div className="grid grid-cols-2 gap-4">
-                            {[
-                                { title: "JavaScript Pro", color: "bg-yellow-100" },
-                                { title: "Ngôn ngữ Sass", color: "bg-pink-100" },
-                                { title: "HTML CSS Pro", color: "bg-blue-100" },
-                                { title: "WSL Ubuntu", color: "bg-purple-100" },
-                            ].map((course, idx) => (
-                                <div
-                                    key={idx}
-                                    className={`${course.color} p-4 rounded-lg shadow hover:scale-105 transition-transform duration-300`}
-                                >
-                                    <h4 className="font-bold text-gray-700">{course.title}</h4>
-                                    <p className="text-sm mt-2 text-gray-600">
-                                        Khóa học nâng cao kỹ năng lập trình của bạn.
-                                    </p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Recent Activities */}
-                    <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                        <h3 className="text-xl font-bold text-gray-800 mb-4">Hoạt động gần đây</h3>
-                        <ul className="space-y-4">
-                            {Array(4)
-                                .fill(0)
-                                .map((_, idx) => (
-                                    <li
-                                        key={idx}
-                                        className="flex items-start space-x-4 hover:bg-gray-100 p-3 rounded-lg transition duration-300"
-                                    >
-                                        <img
-                                            src="/avatar_placeholder.jpg"
-                                            alt="Avatar"
-                                            className="w-12 h-12 rounded-full"
-                                        />
-                                        <p className="text-sm text-gray-700 leading-relaxed">
-                                            <span className="font-bold">Sơn Đặng</span> đã trả lời câu hỏi của{" "}
-                                            <span className="text-blue-500">Việt Bắc</span>: "Hi em, Anh đã ở đó
-                                            rồi, nó là tự động ạ."
-                                        </p>
-                                    </li>
-                                ))}
-                        </ul>
-                    </div>
-                </div>
-            </div>
+                ))}
+            </Slider>
         </div>
     );
 }

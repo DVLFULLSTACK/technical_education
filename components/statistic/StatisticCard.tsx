@@ -106,7 +106,7 @@ export function StatisticCard () {
             <p
               className="text-muted-foreground text-sm mt-2 font-medium"
             >
-             Số người đăng ký
+             Số người đã thanh toán
             </p>
           </CardHeader>
         </Card>
