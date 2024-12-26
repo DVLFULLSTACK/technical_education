@@ -11,7 +11,7 @@ import {
 import toast from "react-hot-toast";
 import { useState } from "react";
 import axios from "axios";
-import { File, Loader2, Lock } from "lucide-react";
+import { Loader2, Lock, Menu } from "lucide-react";
 import { FileResource } from "./FileResource";
 import { Button } from "@/components/ui/button";
 import ReadText from "@/components/custom/ReadText";
@@ -20,9 +20,12 @@ import Link from "next/link";
 import ProgressButton from "./ProgressButton";
 import SectionMenu from "../layout/SectionMenu";
 import YouTubePlayer from "./YoutubePlayer";
-import PDFViewer from "./PDFViewer";
 import { Card} from "@/components/ui/card"
-
+import { SectionNote } from "./SectionNote";
+import { Tabs, TabsContent, TabsTrigger, TabsList } from "@/components/ui/tabs";
+import { useIsMobile } from "@/app/hooks/use-mobile";
+import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
+import { SectionRightMenu } from "./SectionRightMenu";
 interface SectionsDetailsProps {
   course: Course & { sections: Section[] };
   section: Section;
@@ -40,9 +43,9 @@ const SectionsDetails = ({
   resources,
   progress,
 }: SectionsDetailsProps) => {
+  const isMobile = useIsMobile()
   const [isLoading, setIsLoading] = useState(false);
   const isLocked = !purchase && !section.isFree;
-  console.log('Course: ',course)
   const buyCourse = async () => {
     try {
       setIsLoading(true);
@@ -57,10 +60,25 @@ const SectionsDetails = ({
   };
 
   return (
-    <div className="grid grid-cols-[2fr_1fr] px-2 gap-2">
+    <div className="grid lg:grid-cols-[2fr_1fr] px-2 gap-2 relative">
        <Card className="px-6 py-4 flex flex-col gap-5">
       <div className="flex flex-col md:flex-row md:justify-between md:items-center">
+        <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold max-md:mb-4">{section.title}</h1>
+        {isMobile &&
+        <Dialog>
+          <DialogTrigger>
+          <Button className="max-md:mb-4" variant={"ghost"}>
+          <Menu className=""/>
+        </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <SectionRightMenu section_id={section.id}/>
+          </DialogContent>
+        </Dialog>
+       }
+        </div>
+
 
         <div className="flex gap-4">
           <SectionMenu course={course} />
@@ -79,6 +97,7 @@ const SectionsDetails = ({
               isCompleted={!!progress?.isCompleted}
             /> // !! converts falsy values to boolean false
           )}
+
         </div>
       </div>
 
@@ -96,7 +115,7 @@ const SectionsDetails = ({
         //   playbackId={muxData?.playbackId || ""}
         //   className="md:max-w-[600px]"
         // />
-        <YouTubePlayer linkVideo={section.videoUrl || ""} />
+        <YouTubePlayer linkVideo={section.videoUrl || ""} width={isMobile ? "480" : undefined} />
       )}
 
       <div className="space-y-8">
@@ -106,19 +125,13 @@ const SectionsDetails = ({
         ))}
       </div>
     </Card>
-    <Card className="px-6 py-4 space-y-8">
-    <h1 className="text-2xl font-bold max-md:mb-4">Exercise</h1>
-    <div className="text-center space-y-4">
-    <p className="text-gray-400 italic">Nhấn vào nút bên dưới để làm bài tập!</p>
-    <Button asChild>
-      <Link target="_blank"
-      href={"https://leetclone.vercel.app/"}>
-      Bài tập
-      </Link>
-    </Button>
-    </div>
+    {!isMobile &&
+     <Card className="px-6 py-4 space-y-8 sticky top-0 h-max">
+    <SectionRightMenu section_id={section.id}/>
 
-    </Card>
+
+
+    </Card>}
     </div>
 
   );

@@ -144,8 +144,9 @@ export function PostTable() {
     ]
   )
   const handleUpdatePost = async (id: string, post: Post & { author: any }) => {
+    const { author, ...newpost } = post;
     try {
-      const { author, ...newpost } = post;
+
 
       // Cập nhật trạng thái bài viết
       const updatedPost = {
@@ -156,7 +157,17 @@ export function PostTable() {
       await postAction.updateActive(id, updatedPost);
 
       // Gửi email dựa trên trạng thái
-      const emailContent = updatedPost.isActive
+
+
+
+      refetch();
+      toast.success("Cập nhật thành công!");
+    } catch (error) {
+      console.error(error);
+      toast.error("Yêu cầu thất bại");
+    }
+    finally {
+      const emailContent = !post.isActive
         ? {
             subject: "Bài viết của bạn đã được duyệt!",
             text: `Chào ${author.firstName}, bài viết "${post.postName}" của bạn đã được duyệt. Xin cảm ơn đã đóng góp. Link bài viết: http://localhost:3000/forum/${post.id}`,
@@ -165,18 +176,12 @@ export function PostTable() {
             subject: "Bài viết của bạn đã bị từ chối",
             text: `Chào ${author.firstName}, rất tiếc bài viết "${post.postName}" của bạn đã không được duyệt. Vui lòng kiểm tra lại nội dung.`,
           };
-
       await emailAction.send({
         to: author.emailAddresses[0].emailAddress,
         subject: emailContent.subject,
         text: emailContent.text,
       });
 
-      refetch();
-      toast.success("Cập nhật thành công!");
-    } catch (error) {
-      console.error(error);
-      toast.error("Yêu cầu thất bại");
     }
   };
 

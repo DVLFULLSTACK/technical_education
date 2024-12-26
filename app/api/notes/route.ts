@@ -13,15 +13,15 @@ export const POST = async (req: NextRequest) => {
 
         const body = await req.json()
 
-        const newPost = await db.post.create({
+        const newNote = await db.note.create({
             data: {
                 ...body
             }
         })
 
-        return NextResponse.json(newPost, {status: 200 })
+        return NextResponse.json(newNote, {status: 200 })
     } catch (err) {
-        console.log("[posts_POST]", err)
+        console.log("[notes_POST]", err)
         return new NextResponse("Internal Server Error", { status: 500 })
     }
 }
@@ -29,21 +29,17 @@ export const POST = async (req: NextRequest) => {
 export async function GET() {
     try {
       // Lấy tất cả các khóa học
-      const posts = await db.post.findMany({
-        include: {
-
-        },
+      const notes = await db.note.findMany({
 
       });
-      const postsTemp: any[] = posts
-      for (let post of postsTemp) {
-        const user = await clerkClient.users.getUser(post.authorId)
-        post.author = user
+      const notesTemp: any[] = notes
+      for (let note of notesTemp) {
+        const user = await clerkClient.users.getUser(note.authorId)
+        note.author = user
       }
 
-
       return NextResponse.json({
-        data: postsTemp,
+        data: notesTemp,
         status: "success",
       });
     } catch (error) {

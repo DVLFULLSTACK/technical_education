@@ -1,3 +1,4 @@
+import { Course } from "@prisma/client";
 import { ApiResponse } from "../types/api"; // Import ApiResponse
 
 
@@ -22,7 +23,51 @@ const statisticAction = {
     }
   },
 
+  getPurchaseCount: async () : Promise<ApiResponse<number>> => {
+    try {
+      const response = await fetch(`${API_URL}/purchase`, { method: "GET" });
 
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result: ApiResponse<number> = await response.json();
+      return result;
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+      throw error; // Quăng lỗi ra ngoài để React Query xử lý
+    }
+  },
+  getPopularCourse: async () : Promise<ApiResponse<Course>> =>  {
+    try {
+      const response = await fetch(`${API_URL}/purchase/course`, { method: "GET"});
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result: ApiResponse<Course> = await response.json();
+      return result;
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+      throw error; // Quăng lỗi ra ngoài để React Query xử lý
+    }
+  },
+  getUserRegister: async () : Promise<ApiResponse<number>> =>  {
+    try {
+      const response = await fetch(`${API_URL}/purchase/user`, { method: "GET"});
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result: ApiResponse<number> = await response.json();
+      return result;
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+      throw error; // Quăng lỗi ra ngoài để React Query xử lý
+    }
+  }
 
 };
 

@@ -22,19 +22,7 @@ export const metadata = {
 const CourseOverview = async ({ params, searchParams }: { params: { courseId: string }, searchParams: { success?:string, cancel?: string} }) => {
 
   const { userId} = auth()
-  if (searchParams && searchParams.success==="true") {
 
-    try {
-      await purchaseAction.create({
-        customerId: userId || "",
-        courseId: params.courseId
-      })
-      toast.success("Đăng ký học thành công")
-    }
-    catch {
-
-    }
-  }
 
   const course = await db.course.findUnique({
     where: {
@@ -51,10 +39,25 @@ const CourseOverview = async ({ params, searchParams }: { params: { courseId: st
       subCategory: true
     },
   });
-
   if (!course) {
     return redirect("/");
   }
+
+  if (searchParams && searchParams.success==="true") {
+
+    try {
+      await purchaseAction.create({
+        customerId: userId || "",
+        courseId: params.courseId,
+        price: course.price || 0
+      })
+      toast.success("Đăng ký học thành công")
+    }
+    catch {
+
+    }
+  }
+
 
   const instructor = await clerkClient.users.getUser(course.instructorId);
 

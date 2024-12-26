@@ -105,9 +105,9 @@ export default function HeroSection() {
             <img
               src={slide.imageUrl}
               alt={slide.title}
-              className="object-cover w-full h-full"
+              className="object-cover w-full h-full rounded-lg"
             />
-            <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-start p-8 text-white">
+            <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-start p-8 text-white rounded-lg">
               <h2 className="text-3xl font-bold mb-2">{slide.title}</h2>
               <p className="mb-4">{slide.description}</p>
               <button className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">

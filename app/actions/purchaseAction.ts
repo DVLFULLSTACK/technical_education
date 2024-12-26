@@ -119,7 +119,9 @@ const purchaseAction = {
       console.error(`Error fetching purchase with id ${courseId}:`, error);
       throw error;
     }
-  }
+  },
+
+
 };
 
 export default purchaseAction;

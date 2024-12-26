@@ -5,11 +5,12 @@ import { Course } from "@prisma/client";
 export const purchaseSchema = z.object({
   courseId: z.string().min(1,"Required"),
   customerId: z.string().min(1,"Required"),
+  price: z.number().optional(),
 })
 
 export type PurchaseFormInputs = z.infer<typeof purchaseSchema>
 
 export type PurchaseCustom = Purchase & {
   customer: User,
-  course: Course
+  course: Course,
 };

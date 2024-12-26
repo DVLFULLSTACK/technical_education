@@ -1,14 +1,13 @@
 import { ApiResponse } from "../types/api"; // Import ApiResponse
-import { Post } from "@prisma/client"; // Giả sử bạn đang sử dụng Prisma
-import { PostInput } from "@/types/post";
+import { Note } from "@prisma/client"; // Giả sử bạn đang sử dụng Prisma
+import { NoteInput } from "@/types/note";
 
+const API_URL = "/api/notes"; // URL của API
 
-const API_URL = "/api/posts"; // URL của API
-
-// Định nghĩa các action cho post
-const postAction = {
+// Định nghĩa các action cho note
+const noteAction = {
   // Lấy tất cả danh mục
-  getAll: async (): Promise<ApiResponse<any[]>> => {
+  getAll: async (): Promise<ApiResponse<Note[]>> => {
     try {
       const response = await fetch(API_URL, { method: "GET" });
 
@@ -16,7 +15,7 @@ const postAction = {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const result: ApiResponse<Post[]> = await response.json();
+      const result: ApiResponse<Note[]> = await response.json();
       return result;
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -24,74 +23,74 @@ const postAction = {
     }
   },
 
-
-  create: async (post: PostInput): Promise<ApiResponse<Post>> => {
+  // Tạo mới danh mục
+  create: async (note: NoteInput): Promise<ApiResponse<Note>> => {
     try {
       const response = await fetch(API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify( post ),
+        body: JSON.stringify( note ),
       });
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const result: ApiResponse<Post> = await response.json();
+      const result: ApiResponse<Note> = await response.json();
       return result;
     } catch (error) {
-      console.error("Error creating post:", error);
+      console.error("Error creating note:", error);
       throw error;
     }
   },
 
-
-  getById: async (id: string): Promise<ApiResponse<Post & { author: any}>> => {
-    const postId = id
+  // Lấy danh mục theo ID
+  getById: async (id: string): Promise<ApiResponse<Note>> => {
+    const noteId = id
     try {
-      const response = await fetch(`${API_URL}/${postId}`, { method: "GET" });
+      const response = await fetch(`${API_URL}/${noteId}`, { method: "GET" });
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const result: ApiResponse<Post & {author: any}> = await response.json();
-
+      const result: ApiResponse<Note> = await response.json();
       return result;
     } catch (error) {
-      console.error(`Error fetching post with id ${id}:`, error);
+      console.error(`Error fetching note with id ${id}:`, error);
       throw error;
     }
   },
 
   // Cập nhật danh mục theo ID
-  update: async (id: string, post: PostInput): Promise<ApiResponse<Post>> => {
-    const postId = id
+  update: async (id: string, note: NoteInput): Promise<ApiResponse<Note>> => {
+    const noteId = id
     try {
-      const response = await fetch(`${API_URL}/${postId}`, {
+      const response = await fetch(`${API_URL}/${noteId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(post),
+        body: JSON.stringify(note),
       });
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const result: ApiResponse<Post> = await response.json();
+      const result: ApiResponse<Note> = await response.json();
       return result;
     } catch (error) {
-      console.error(`Error updating post with id ${id}:`, error);
+      console.error(`Error updating note with id ${id}:`, error);
       throw error;
     }
   },
 
   // Xóa danh mục theo ID
   delete: async (id: string): Promise<string> => {
+    const noteId = id
     try {
       const response = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
 
@@ -102,33 +101,27 @@ const postAction = {
 
       return response.statusText;
     } catch (error) {
-      console.error(`Error deleting post with id ${id}:`, error);
+      console.error(`Error deleting note with id ${id}:`, error);
       throw error;
     }
   },
 
-  updateActive: async (id: string, post: Post): Promise<ApiResponse<Post>> => {
-    const postId = id
+  getBySection: async (id: string) => {
+    console.log('fasfsafas');
     try {
-      const response = await fetch(`${API_URL}/${id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(post),
-      });
+      const response = await fetch(`${API_URL}/section/${id}`, { method: "GET"});
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const result: ApiResponse<Post> = await response.json();
+      const result: ApiResponse<Note[]> = await response.json();
       return result;
     } catch (error) {
-      console.error(`Error updating post with id ${id}:`, error);
-      throw error;
+      console.error("Error fetching categories:", error);
+      throw error; // Quăng lỗi ra ngoài để React Query xử lý
     }
   }
 };
 
-export default postAction;
+export default noteAction;

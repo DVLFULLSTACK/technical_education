@@ -27,14 +27,14 @@ export async function POST(request: NextRequest) {
     const transporter = nodemailer.createTransport({
       service: 'gmail', // Hoặc dùng SMTP server khác
       auth: {
-        user: process.env.NEXT_PUBLIC_EMAIL_USER as string, // Đảm bảo user không undefined/null
+        user: process.env.NEXT_PUBLIC_EMAIL as string, // Đảm bảo user không undefined/null
         pass: process.env.NEXT_PUBLIC_EMAIL_PASS as string, // App Password hoặc mật khẩu
       },
     });
 
     // Nội dung email
     const mailOptions = {
-      from: process.env.NEXT_PUBLIC_EMAIL_USER, // Email gửi
+      from: process.env.NEXT_PUBLIC_EMAIL, // Email gửi
       to, // Email nhận
       subject, // Tiêu đề
       text, // Nội dung

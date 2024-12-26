@@ -4,6 +4,8 @@ export const metadata = {
   title: "Thống kê"
 }
 import { Statistic } from "@/components/statistic/Statistic"
+import { StatisticCard } from "@/components/statistic/StatisticCard"
+import { LineChartMultiple } from "@/components/charts/line-chart"
 
 export default function PurchasePage () {
 
@@ -16,6 +18,7 @@ export default function PurchasePage () {
 
       </div>
       <Statistic />
+      <StatisticCard />
     </div>
   )
 }

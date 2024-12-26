@@ -189,3 +189,16 @@ model Like {
 
   @@unique([postId, userId])               // Một người dùng chỉ thích một bài một lần
 }
+
+
+model Note {
+  id        String   @id @default(uuid())
+  content   String   @db.Text
+  userId    String
+  sectionId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+
+  @@index([userId, sectionId])  // Cho phép nhiều ghi chú trên cùng một section từ cùng một người dùng
+  @@index([sectionId])
+}

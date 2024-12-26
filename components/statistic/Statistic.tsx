@@ -18,9 +18,9 @@ export const Statistic = () => {
   return (
     <Card className="p-8 space-y-8">
     <h1 className="font-bold text-gray-600">Thống kê tổng quan</h1>
-    <div className="flex justify-around">
-      {statistic?.data.map(item => (
-        <StatisticNumber value={item.value} name={item.name}/>
+    <div className="flex flex-col gap-4 lg:gap-0 lg:flex-row justify-around">
+      {statistic?.data.map((item, index) => (
+        <StatisticNumber key={index} value={item.value} name={item.name}/>
       ))}
 
 
